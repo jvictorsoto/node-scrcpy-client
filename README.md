@@ -91,6 +91,16 @@ return SurfaceControl.createDisplay("scrcpy", false);
 
 With these changes, `scrcpy` was built from source and the `.jar` file has been dumped into this repo in `lib` folder.
 
+#### Relevant Links
+
+Stuff that helped fix this issue:
+
+https://github.com/libsdl-org/SDL/issues/3657
+https://github.com/Genymobile/scrcpy/issues/1787
+https://github.com/Genymobile/scrcpy/commit/dd73a71a158e8bb6f1c09cd118b24ed9a48dae99
+https://github.com/Genymobile/scrcpy/issues/1726
+
+
 ## License (MIT)
 
 In case you never heard about the [MIT license](http://en.wikipedia.org/wiki/MIT_license).
