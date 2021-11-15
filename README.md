@@ -68,6 +68,39 @@ DEBUG=scrcpy
 npm test
 ```
 
+## Jar Issues with Latest Pixel
+
+On the latest Pixel OS there are some issues with the Jar file where no data was being streamed after the first `await this.socket.read(69)` command. This repo contains a build of `scrcpy-1.8` where two main changes have been made.
+
+#### `app/src/sys/unix/command.c`
+
+This file now contains the following lines at the beginning of the file:
+
+```
+#define _POSIX_C_SOURCE 200809L // for kill()
+#define _BSD_SOURCE // for readlink()
+```
+
+#### `server/src/main/java/com/genymobile/scrcpy/ScreenEncoder.java`
+
+This file now contains the following on line 153 (in the `createDisplay` function):
+
+```
+return SurfaceControl.createDisplay("scrcpy", false);
+```
+
+With these changes, `scrcpy` was built from source and the `.jar` file has been dumped into this repo in `lib` folder.
+
+#### Relevant Links
+
+Stuff that helped fix this issue:
+
+https://github.com/libsdl-org/SDL/issues/3657
+https://github.com/Genymobile/scrcpy/issues/1787
+https://github.com/Genymobile/scrcpy/commit/dd73a71a158e8bb6f1c09cd118b24ed9a48dae99
+https://github.com/Genymobile/scrcpy/issues/1726
+
+
 ## License (MIT)
 
 In case you never heard about the [MIT license](http://en.wikipedia.org/wiki/MIT_license).
